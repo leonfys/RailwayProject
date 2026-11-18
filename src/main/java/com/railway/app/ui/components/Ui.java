@@ -33,6 +33,8 @@ public final class Ui {
         JLabel label = new JLabel(text);
         label.setFont(font);
         label.setForeground(color);
+        // A little spare room so the last glyph of bold text is never clipped.
+        label.setBorder(new EmptyBorder(0, 0, 0, Math.max(2, Math.round(font.getSize2D() * 0.2f))));
         return label;
     }
 

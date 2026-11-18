@@ -19,6 +19,16 @@ Course project for **Principles of Database Management (IT079IU), Semester 1 202
 | Stations & Tracks | Stations and the two-way track sections between them |
 | Reports | The 12 required questions in plain language with parameters, plus sales statistics; printable |
 
+## Screenshots
+
+| | |
+|---|---|
+| ![Home](docs/screenshots/01_home.png) | ![Find a trip](docs/screenshots/02_booking_1_trip.png) |
+| ![Pick a seat](docs/screenshots/03_booking_2_seat.png) | ![Passenger and payment](docs/screenshots/04_booking_3_passenger.png) |
+| ![Ticket](docs/screenshots/05_booking_4_ticket.png) | ![Tickets](docs/screenshots/06_tickets.png) |
+| ![Passengers](docs/screenshots/07_passengers.png) | ![Trains and timetables](docs/screenshots/08_trains_timetable.png) |
+| ![Stations and tracks](docs/screenshots/09_stations_tracks.png) | ![Reports](docs/screenshots/10_reports.png) |
+
 ## Project layout
 
 ```

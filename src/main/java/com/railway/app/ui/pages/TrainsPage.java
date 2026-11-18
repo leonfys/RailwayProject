@@ -101,13 +101,13 @@ public class TrainsPage extends Page {
         listCard.add(trains, BorderLayout.CENTER);
 
         stops = new DataTable(List.of(
-                Column.of("#", "Stop_No", Kind.MUTED, 40),
-                Column.of("Station", "Station_Name", Kind.STRONG, 175),
-                Column.timeWithDay("Arrives", "Arrival", "Arrival_Day", 100),
-                Column.timeWithDay("Departs", "Departure", "Departure_Day", 100),
-                Column.custom("Stop", 65, r -> r.integer("Dwell_Minutes") == null ? "" : r.integer("Dwell_Minutes") + " min"),
-                Column.of("From start", "Km_From_Origin", Kind.KM, 95),
-                Column.of("", "Stop_Role", Kind.BADGE, 115)));
+                Column.of("#", "Stop_No", Kind.MUTED, 46),
+                Column.of("Station", "Station_Name", Kind.STRONG, 150),
+                Column.timeWithDay("Arrives", "Arrival", "Arrival_Day", 118),
+                Column.timeWithDay("Departs", "Departure", "Departure_Day", 118),
+                Column.custom("Stop", 72, r -> r.integer("Dwell_Minutes") == null ? "" : r.integer("Dwell_Minutes") + " min"),
+                Column.of("From start", "Km_From_Origin", Kind.KM, 90),
+                Column.of("", "Stop_Role", Kind.BADGE, 112)));
         stops.setEmptyMessage("No stops yet — add the first station the train leaves from");
         stops.onDoubleClick(r -> editStop());
 
@@ -139,7 +139,9 @@ public class TrainsPage extends Page {
     private JComponent buildDetail() {
         trainBadge.setFont(AppTheme.semibold(15));
         Card header = new Card(new BorderLayout(16, 12), 20);
-        JPanel titleRow = Ui.flow(10, trainBadge, trainName);
+        JPanel titleRow = Ui.transparent(new BorderLayout(10, 0));
+        titleRow.add(trainBadge, BorderLayout.WEST);
+        titleRow.add(trainName, BorderLayout.CENTER);
         header.add(Ui.stack(Ui.flow(8, typeBadge, statusBadge), Ui.vgap(10), routeLine, Ui.vgap(4), factsLine),
                 BorderLayout.SOUTH);
 

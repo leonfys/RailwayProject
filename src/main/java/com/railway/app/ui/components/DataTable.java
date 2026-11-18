@@ -261,8 +261,8 @@ public class DataTable extends JPanel {
             if (column.kind() == Kind.TIME_DAY) {
                 String day = Formats.dayOffset(row.integer(column.extraKey()));
                 if (!day.isEmpty()) {
-                    text = "<html>" + Formats.html(text) + "&nbsp;&nbsp;<span style='color:"
-                            + AppTheme.hex(AppTheme.ORANGE_DARK) + ";font-size:9px'>" + day + "</span></html>";
+                    text = "<html><nobr>" + Formats.html(text) + "&nbsp;&nbsp;<span style='color:"
+                            + AppTheme.hex(AppTheme.ORANGE_DARK) + ";font-size:9px'>" + day + "</span></nobr></html>";
                 }
             }
             setText(text);
