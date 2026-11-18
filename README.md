@@ -7,6 +7,36 @@ Course project for **Principles of Database Management (IT079IU), Semester 1 202
 - **MySQL 8.0**: every business rule lives in stored functions and procedures
 - **JDBC only calls routines**: the application never sends SELECT/INSERT/UPDATE/DELETE statements of its own
 
+## Quick start: clone and double-click
+
+```
+git clone https://github.com/leonfys/RailwayProject.git
+```
+
+Open the folder and double-click **`Setup.exe`** (if it is blocked: `Setup.bat`). Then press
+**Set up everything & open the app**. Railway Setup:
+
+1. finds a Java 17+ JDK, or offers to install Temurin 21 with winget;
+2. uses the MySQL already on your computer, **or** downloads a private portable MySQL 8.0
+   (port 3307, root / root, in `%USERPROFILE%\.railway-mysql`) when you have none or forgot the root password;
+3. loads `01` + `02` + `03` from `database/` (skipped if the database is already complete);
+4. builds the app with the Maven Wrapper (`mvnw.cmd`, no Maven installation needed);
+5. opens the Railway app.
+
+| Page | What it does |
+|------|--------------|
+| Environment | Checklist (Java, Maven, MySQL, sign-in, database, build), installed vs portable MySQL, user / password of **your** MySQL |
+| Database | Reset to sample data, reload routines only (keeps data), run `queries_reference.sql`, delete, create `railway_app` |
+| Build & Run | Build, open and close the app; its console output appears live |
+| Git | Status, fetch, pull, switch / create branch, commit, merge, push — each button shows the git command it runs |
+| Logs | `logs/railway-app.0.log` and `logs/setup-app.log`, filtered by level, followed live |
+
+Every team member's MySQL user and password stay on their own computer: Setup writes them to
+`config/setup.properties` (its admin sign-in) and `config/connection.properties` (the app's sign-in), and both files
+are ignored by git. The admin account must be allowed to create databases and routines (root is); if it is not,
+Setup says so and suggests the portable MySQL. The passwords are stored as plain text in those two files, so use
+them only for this local test database.
+
 ## Screens
 
 | Screen | What staff can do |
@@ -47,11 +77,16 @@ src/main/java/com/railway/app/
   data/       Database (the only JDBC class), Routine (allowed routine names), Row
   service/    one thin method per routine
   ui/         main window, pages, dialogs, components, theme
+tools/setup-app/              source of Railway Setup (Java Swing, own pom.xml)
+tools/launcher/               source of Setup.exe (C#), its manifest and icon
+scripts/build-setup.ps1       rebuilds SetupApp.jar and Setup.exe (maintainers only)
+Setup.exe / Setup.bat         start Railway Setup (SetupApp.jar, prebuilt and committed)
+mvnw.cmd, mvnw, .mvn/         Maven Wrapper: downloads Maven 3.9 on first use
 setup_database.bat            runs 01 + 02 + 03 with the MySQL client
 run.bat                       starts the built application
 ```
 
-## Setup
+## Manual setup (without Railway Setup)
 
 1. **Database** (MySQL 8.0 server running):
    double-click `setup_database.bat`, or in MySQL Workbench / the `mysql` client run, in order,
@@ -64,10 +99,13 @@ run.bat                       starts the built application
    If it is missing, the app creates it with default values on first start.
 4. **Build and run:**
    ```
-   mvn package
+   mvnw.cmd package   (or mvn package if Maven is installed)
    run.bat            (or: java -jar target/railway-manager.jar)
    ```
-   During development: `mvn compile exec:java`.
+   During development: `mvnw.cmd compile exec:java`.
+
+To change Railway Setup itself, edit `tools/setup-app` or `tools/launcher`, then run
+`powershell -ExecutionPolicy Bypass -File scripts\build-setup.ps1` and commit the new `SetupApp.jar` / `Setup.exe`.
 
 If the app cannot connect, it shows a plain message ("We can't reach the booking system right now…").
 Technical details are written to `logs/railway-app.0.log`.

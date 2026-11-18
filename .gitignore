@@ -20,3 +20,6 @@ nbactions.xml
 
 # Contains team members personal data - keep local only
 docs/original/Project_Report.pdf
+
+# Railway Setup: this computer's MySQL choice and admin password - never commit it
+config/setup.properties
