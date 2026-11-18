@@ -17,3 +17,6 @@ logs/
 .classpath
 nbproject/
 nbactions.xml
+
+# Contains team members personal data - keep local only
+docs/original/Project_Report.pdf
